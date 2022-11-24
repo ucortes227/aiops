@@ -1,13 +1,13 @@
 #build:
-#  adsoftsito:
-#    image: okteto.dev/adsoftsito:latest
+#  ucortes227:
+#    image: okteto.dev/ucortes227:latest
 
 deploy:
 #  - okteto build # build the image with the latest code
   - kubectl apply -f manifests # create all the resources in kubernetes
 
 #dev:
-#  adsoftsito:
+#  ucortes227:
 #    command: bash
 #    sync:
 #    - .:/hackernews
