@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: resnet-deployment
+  name: {model_name}-deployment
 spec:
   selector:
     matchLabels:
-      app: resnet-server
+      app: {model_name}-server
   replicas: 3
   template:
     metadata:
       labels:
-        app: resnet-server
+        app: {model_name}-server
     spec:
       containers:
-      - name: resnet-container
+      - name: {model_name}-container
         #image: gcr.io/tensorflow-serving/resnet 
-        image: docker.io/ucortes227/tensorflow_linear_model
+        image: docker.io/{docker_user}/tensorflow_{model_name}:{github.sha}
         ports:
         - containerPort: 8501
 ---
@@ -24,12 +24,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: resnet-service
-  name: resnet-service
+    run: {model_name}-service
+  name: {model_name}-service
 spec:
   ports:
   - port: 8501
     targetPort: 8501
   selector:
-    app: resnet-server
+    app: {model_name}-server
   type: LoadBalancer
